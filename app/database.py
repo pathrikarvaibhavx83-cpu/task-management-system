@@ -1,13 +1,16 @@
-from sqlalchemy import create_engine
-from sqlalchemy.engine import URL
-from app.models import Base
-from sqlalchemy.orm import sessionmaker
-from dotenv import load_dotenv
+from pathlib import Path
 import os
 
-from pathlib import Path
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy.engine import URL
+from sqlalchemy.orm import sessionmaker
+
+from app.models import Base
+
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+
 
 database_url = URL.create(
     drivername="postgresql+psycopg2",
@@ -18,16 +21,18 @@ database_url = URL.create(
     database=os.getenv("DB_NAME"),
 )
 
+
 engine = create_engine(database_url)
+
 SessionLocal = sessionmaker(bind=engine)
+
+Base.metadata.create_all(bind=engine)
+
+
 def get_db():
     db = SessionLocal()
+
     try:
         yield db
     finally:
         db.close()
-
-Base.metadata.create_all(engine)
-
-with engine.connect() as connection:
-    print("Database connection successful!")
