@@ -56,17 +56,15 @@ A REST API for managing tasks using FastAPI and PostgreSQL.
 
 | Method | Endpoint | Description |
 
-|---|---|---|
+| GET    | /        | Check API status |
 
-| GET | / | Check API status |
+| POST   | /tasks   | Create a task |
 
-| POST | /tasks | Create a task |
+| GET    | /tasks   | Get all tasks |
 
-| GET | /tasks | Get all tasks |
+| GET    | /tasks/{task\_id} | Get a task |
 
-| GET | /tasks/{task\_id} | Get a task |
-
-| PUT | /tasks/{task\_id} | Update a task |
+| PUT    | /tasks/{task\_id} | Update a task |
 
 | DELETE | /tasks/{task\_id} | Delete a task |
 
@@ -122,7 +120,7 @@ Open Swagger UI:
 
 
 
-http://127.0.0.1:8000/docs
+http://127.0.0.1:8001/docs
 
 
 
